@@ -1,0 +1,14 @@
+# ปิดการแสดงรายชื่อไฟล์ในโฟลเดอร์
+Options -Indexes
+
+# ป้องกันไม่ให้เข้าถึงไฟล์ที่ขึ้นต้นด้วยจุด (เช่น .env, .git)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ป้องกันการเข้าถึงไฟล์คอนฟิกโดยตรง (วิธีที่ปลอดภัยกว่าบน .htaccess)
+<FilesMatch "\.(inc|ini|log|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

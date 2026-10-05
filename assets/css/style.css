@@ -1,0 +1,270 @@
+/* ==========================================================================
+   File: assets/css/style.css
+   Description: Main Stylesheet for CarOrderSystem (Desktop & Mobile Responsive)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. System Variables & Base Setup (Global Settings)
+   -------------------------------------------------------------------------- */
+:root {
+    --primary-color: #0d6efd;
+    --hover-bg: #e7f1ff;
+    --text-main: #333333;
+    --text-muted: #6c757d;
+    --bg-light: #f8f9fa;
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 80px;
+    --font-sarabun: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box !important;
+}
+
+body {
+    font-family: var(--font-sarabun);
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.main-wrapper {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   2. Form Controls & Dropdown Boundary Protection
+   -------------------------------------------------------------------------- */
+.d-flex > div,
+.flex-column > div,
+.row > div,
+[class*="col-"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+/* ควบคุมขนาด Input / Native Select หลัก */
+.form-select, 
+.form-control,
+select,
+input,
+textarea {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* ปรับแต่ง Native Options ไม่ให้ข้อความดันเลเยอร์ออกข้าง */
+.form-select option,
+select option {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Custom Dropdown (Select2) Override - ล็อคขอบพอดีกรอบสีแดง 100%
+   -------------------------------------------------------------------------- */
+.select2-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.select2-container .select2-selection--single {
+    width: 100% !important;
+    height: 38px !important;
+    padding: 5px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    box-sizing: border-box !important;
+}
+
+.select2-dropdown {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border: 1px solid #86b7fe !important;
+    border-radius: 0 0 6px 6px !important;
+    overflow: hidden !important;
+}
+
+.select2-results__option {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding: 8px 12px !important;
+    font-size: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Content Area & Layout (Desktop Default)
+   -------------------------------------------------------------------------- */
+.content-area,
+.main-content,
+#mainContentArea {
+    flex: 1;
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    padding: 24px;
+    transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+    box-sizing: border-box !important;
+    max-width: 100%;
+}
+
+body.sidebar-collapsed .content-area,
+body.sidebar-collapsed .main-content,
+body.sidebar-collapsed #mainContentArea {
+    margin-left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Sidebar Layout (Desktop Default)
+   -------------------------------------------------------------------------- */
+.sidebar {
+    min-width: var(--sidebar-width);
+    max-width: var(--sidebar-width);
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+    z-index: 1050;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.collapsed {
+    min-width: var(--sidebar-collapsed-width);
+    max-width: var(--sidebar-collapsed-width);
+}
+
+.sidebar.collapsed .nav-link span,
+.sidebar.collapsed .sidebar-text,
+.sidebar.collapsed .brand-text {
+    display: none !important;
+}
+
+.sidebar .nav-link {
+    color: #495057;
+    font-weight: 500;
+    padding: 12px 20px;
+    margin: 4px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #e9ecef;
+    color: var(--primary-color);
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+   6. Cards & Dashboard Grid System
+   -------------------------------------------------------------------------- */
+.dashboard-grid,
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.card,
+.data-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    box-sizing: border-box !important;
+    max-width: 100%;
+    min-width: 0 !important;
+    position: relative;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   7. Responsive Data Tables
+   -------------------------------------------------------------------------- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}
+
+.table {
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. Mobile Responsive Overrides (มีผลเฉพาะหน้าจอ <= 767.98px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+    .content-area,
+    .main-content,
+    #mainContentArea {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 16px !important;
+    }
+
+    .dashboard-grid,
+    .card-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    h1, .h1 { font-size: 1.4rem !important; }
+    h2, .h2 { font-size: 1.25rem !important; }
+    h3, .h3 { font-size: 1.1rem !important; }
+    
+    .table-responsive {
+        border-radius: 6px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   9. Extra Small Mobile Screens (<= 576px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 576px) {
+    .content-area,
+    .main-content,
+    #mainContentArea {
+        padding: 12px !important;
+    }
+}
